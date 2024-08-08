@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +20,17 @@
         <div class="container">
             <h1>TODO LIST</h1>
             <ul>
-                <li v-for="(task,i) in toDoList" :key="i">
-                    {{ task }}
+                
+                <li v-for="(task,i) in toDoList" :key="i" :class="{ pinned: task.pinned }">
+                    {{ task.task }}
+                    
                     <i class="fa-solid fa-trash" @click="deleteTask(i)"></i>
+                    <i class="fa-solid fa-map-pin" @click="pinTask(i)"></i>
                 </li>
+                
             </ul>
-            <div>
-                <input type="text" @keyup.enter="addTask" v-model="newTask">
+            <div id="add_task">
+                <input type="text" @keyup.enter="addTask" v-model="newTask" :placeholder="message">
                 <button @click="addTask">Add Task</button>
             </div>
         </div>

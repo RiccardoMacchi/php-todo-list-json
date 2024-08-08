@@ -2,13 +2,19 @@
 // Recupero file json e salvato in stringa
 $listJasonString = file_get_contents('list.json');
 
-// Trasformazione stringa in elemento PHP
-$list = json_decode($listJasonString);
+// Trasformazione stringa in elemento PHP con aggiunta true per avere valori booleani
+$list = json_decode($listJasonString, true);
+
+// messaggio in input
+$message = 'Inserisci una nuova task';
 
 // Verifico se ricevo i dati nel post e aggiunto la task nel file json
 if(isset($_POST['newTask'])){
     $newTask = $_POST['newTask'];
-    $list[] = $newTask;
+    // Verifica per content vuoto
+    if($newTask['task'] !== ""){
+        $list[] = $newTask;
+    }
     // aggiornamento del file
     file_put_contents('list.json', json_encode($list));
 }
@@ -18,6 +24,31 @@ if(isset($_POST['iToDelete'])){
     array_splice($list, $iToDelete, 1);
     // aggiornamento del file
     file_put_contents('list.json', json_encode($list));
+}
+
+// Verifico per pinnnare le task
+if(isset($_POST['taskToPin'])){
+    $taskToPinI = $_POST['taskToPin'];
+    // Contenuto della task
+    $taskToPin = $list[$taskToPinI];
+    // Modifica pinned toggle
+    $taskToPin['pinned'] = !$taskToPin['pinned']; 
+
+    // Rimozione task
+    array_splice($list, $taskToPinI, 1);
+
+    if ($taskToPin['pinned']) {
+        // Se la task è pinnata, spostala all'inizio della lista
+        array_unshift($list, $taskToPin);
+    } else {
+        // Se la task non è più pinnata, aggiungila alla fine della lista
+        $list[] = $taskToPin;
+    }
+
+    // aggiornamento del file
+    file_put_contents('list.json', json_encode($list));
+
+    
 }
 
 // Restituzione del file JSON
