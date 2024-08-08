@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+}
+
+li i {
+    float: right;
+    color: red;
+}

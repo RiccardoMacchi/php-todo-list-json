@@ -33,9 +33,24 @@ createApp({
                 .then((response) => {
                     this.toDoList = response.data;
                     console.log(this.toDoList)
+                    // Puliza v-model
+                    this.newTask = '';
                 })
-            // Puliza v-model
-            this.newTask = '';
+
+        },
+        deleteTask(i) {
+            const data = {
+                iToDelete: i
+            }
+
+            axios.post(this.apiUrl, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((response) => {
+                    this.toDoList = response.data;
+                })
         }
     },
     mounted() {
