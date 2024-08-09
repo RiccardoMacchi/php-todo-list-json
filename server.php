@@ -10,14 +10,29 @@ $list = json_decode($listJasonString, true);
 // -------------------------------------------------------------------------------------
 
 
-// Verifico se ricevo i dati nel post e aggiunto la task nel file json
+/// Funzione per convertire stringhe true e false in booleani
+function boolValue($taskValue) {
+    if ($taskValue === "true") {
+        return true;
+    } elseif ($taskValue === "false") {
+        return false;
+    }
+}
+
+// Verifico se ricevo i dati nel post e aggiungo la task nel file json
 if(isset($_POST['newTask'])){
     $newTask = $_POST['newTask'];
-    // Verifica per content vuoto
+    
+    // Converti i valori pinned e done in booleani
+    $newTask['pinned'] = boolValue($newTask['pinned']);
+    $newTask['done'] = boolValue($newTask['done']);
+
+    // Verifica per contenuto vuoto
     if($newTask['task'] !== ""){
         $list[] = $newTask;
     }
-    // aggiornamento del file
+
+    // Aggiornamento del file
     file_put_contents('list.json', json_encode($list));
 }
 

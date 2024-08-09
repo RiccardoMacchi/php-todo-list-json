@@ -1,7 +1,3 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,20 +15,28 @@
     <div id="app">
         <div class="container">
             <h1>TODO LIST</h1>
-            <ul>
+            <div v-if="toDoList.length === 0">
+                <h3>Congraturazione hai completato tutte le task!! <i class="fa-solid fa-face-smile-wink"></i></h3>
+            </div>
+            <ul v-else>
                 
-                <li v-for="(task,i) in toDoList" :key="i" :class="{ pinned: task.pinned, done: task.done }" @click="doneTask(i)">
-                    {{ task.task }}
+                <li v-for="(task,i) in toDoList" :key="i" :class="{ pinned: task.pinned, done: task.done }" >
+                    <div @click="doneTask(i)">
+                        {{ task.task }}
+                    </div>
                     
-                    <i class="fa-solid fa-trash" @click="deleteTask(i)"></i>
-                    <i class="fa-solid fa-map-pin" @click="pinTask(i)"></i>
+                    
+                    <div class="icons_option">
+                        <i class="fa-solid fa-trash" @click="deleteTask(i)"></i>
+                        <i class="fa-solid fa-map-pin" @click="pinTask(i)"></i>
+                    </div>
                 </li>
                 
             </ul>
             <div id="add_task">
-                <h4 v-if="errorInputTask" class="error_task">La task deve avere una lungezza minima di 3 caratteri</h4>
-                <h4 v-else-if="taskAdded">TASK AGGIUNTA CON SUCCESSO!</h4>
-                <h4 v-else>AGGIUNGI UNA TASK</h4>
+                <h4 v-if="errorInputTask" id="error_task">La task deve avere una lungezza minima di 3 caratteri</h4>
+                <h4 v-else-if="taskAdded" id="success_task">TASK AGGIUNTA CON SUCCESSO!</h4>
+                <h4 v-else id="add_task_text">AGGIUNGI UNA TASK</h4>
                 <input type="text" @keyup.enter="addTask" v-model="newTask" :placeholder="message">
                 <button @click="addTask">Add Task</button>
             </div>

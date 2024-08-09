@@ -11,7 +11,11 @@ body {
 
 .container {
     width: 60%;
+    height: 100vh;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h1 {
@@ -19,13 +23,26 @@ h1 {
     margin: 20px auto;
 }
 
+h3 {
+    color: greenyellow;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 ul {
+    flex-grow: 1;
     list-style: none;
 }
 
 li {
     padding: 10px 20px;
     border: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+}
+
+li div:first-child {
+    flex-grow: 1;
 }
 
 li:first-child {
@@ -38,26 +55,41 @@ li:last-child {
     border-bottom-right-radius: 10px;
 }
 
-li i {
-    float: right;
+.icons_option {
     margin: 0 10px;
     color: red;
-
+    z-index: 20;
 }
+
+.icons_option i {
+    margin: 0 10px;
+}
+
 
 .pinned {
     font-weight: bold;
     background-color: rgb(125, 114, 101);
 }
 
-li .done {
+.done {
     text-decoration: line-through;
-    color: green;
-    background-color: aqua;
 }
 
-.error_task {
+h4 {
+    margin-bottom: 20px;
+}
+
+#add_task_text {
+    font-size: 2rem;
+    color: darkorange;
+}
+
+#error_task {
     color: red;
+}
+
+#success_task {
+    color: green;
 }
 
 #add_task {

@@ -1,4 +1,5 @@
-const { createApp } = Vue
+const { createApp } = Vue;
+
 
 createApp({
     data() {
@@ -35,7 +36,8 @@ createApp({
             const data = {
                 newTask: {
                     "task": this.newTask,
-                    "pinned": false
+                    "pinned": false,
+                    "done": false
                 }
             }
             axios.post(this.apiUrl, data, {
