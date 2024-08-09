@@ -6,7 +6,9 @@ createApp({
             apiUrl: 'server.php',
             toDoList: [],
             newTask: '',
-            message: 'inserisci una nuova Task'
+            message: 'inserisci una nuova Task',
+            errorInputTask: false,
+            taskAdded: false,
         }
     },
     methods: {
@@ -21,11 +23,15 @@ createApp({
                 })
         },
         addTask() {
-            if (this.newTask.trim() === '') {
+            if (this.newTask.trim() === '' || this.newTask.length < 3) {
+
                 this.message = 'Il campo non può essere vuoto!';
+                this.errorInputTask = true;
+                this.newTask = '';
                 return;
             }
             // Creazione oggetto da inviare al server
+            console.log(this.newTask.length)
             const data = {
                 newTask: {
                     "task": this.newTask,
@@ -42,6 +48,11 @@ createApp({
                     this.toDoList = response.data;
                     console.log(this.toDoList)
                 })
+            // Aggiunta task toggles
+            this.taskAdded = true
+            this.errorInputTask = false
+            // Ripristino toggle taskAdded
+            setTimeout(() => { this.taskAdded = false }, 5000)
             // Puliza v-model
             this.newTask = '';
 
@@ -66,6 +77,19 @@ createApp({
                 taskToPin: i
             }
 
+            axios.post(this.apiUrl, data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((response) => {
+                    this.toDoList = response.data;
+                })
+        },
+        doneTask(i) {
+            const data = {
+                taskDone: i
+            }
             axios.post(this.apiUrl, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'

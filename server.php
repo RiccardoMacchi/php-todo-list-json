@@ -5,8 +5,10 @@ $listJasonString = file_get_contents('list.json');
 // Trasformazione stringa in elemento PHP con aggiunta true per avere valori booleani
 $list = json_decode($listJasonString, true);
 
-// messaggio in input
-$message = 'Inserisci una nuova task';
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+
 
 // Verifico se ricevo i dati nel post e aggiunto la task nel file json
 if(isset($_POST['newTask'])){
@@ -18,6 +20,9 @@ if(isset($_POST['newTask'])){
     // aggiornamento del file
     file_put_contents('list.json', json_encode($list));
 }
+
+
+
 // Verifico se ricevo i dati e cancello il dato nel file jason
 if(isset($_POST['iToDelete'])){
     $iToDelete = $_POST['iToDelete'];
@@ -25,6 +30,8 @@ if(isset($_POST['iToDelete'])){
     // aggiornamento del file
     file_put_contents('list.json', json_encode($list));
 }
+
+
 
 // Verifico per pinnnare le task
 if(isset($_POST['taskToPin'])){
@@ -47,9 +54,23 @@ if(isset($_POST['taskToPin'])){
 
     // aggiornamento del file
     file_put_contents('list.json', json_encode($list));
-
-    
+ 
 }
+
+// Verifico per aggiungere classe done
+if(isset($_POST['taskDone'])){
+    $taskDone = $_POST['taskDone'];
+    // Modifica pinned toggle
+    $list[$taskDone]['done'] = !$list[$taskDone]['done'];
+
+    // aggiornamento del file
+    file_put_contents('list.json', json_encode($list));
+}
+
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------
+
 
 // Restituzione del file JSON
 // Modifica dell'header del file per farlo interprestare come json

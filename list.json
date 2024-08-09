@@ -1,1 +1,1 @@
-[{"task":"bootstrap","pinned":true},{"task":"ciao","pinned":true},{"task":"laravel","pinned":false},{"task":"html","pinned":false},{"task":"sass","pinned":false},{"task":"javascript","pinned":false},{"task":"css","pinned":false}]
+[{"task":"html","pinned":true,"done":true},{"task":"css","pinned":true,"done":true},{"task":"javascript","pinned":true,"done":true},{"task":"sass","pinned":false,"done":true},{"task":"laravel","pinned":false,"done":false},{"task":"bootstrap","pinned":false,"done":true},{"task":"bene","pinned":false,"done":false}]

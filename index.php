@@ -21,7 +21,7 @@
             <h1>TODO LIST</h1>
             <ul>
                 
-                <li v-for="(task,i) in toDoList" :key="i" :class="{ pinned: task.pinned }">
+                <li v-for="(task,i) in toDoList" :key="i" :class="{ pinned: task.pinned, done: task.done }" @click="doneTask(i)">
                     {{ task.task }}
                     
                     <i class="fa-solid fa-trash" @click="deleteTask(i)"></i>
@@ -30,6 +30,9 @@
                 
             </ul>
             <div id="add_task">
+                <h4 v-if="errorInputTask" class="error_task">La task deve avere una lungezza minima di 3 caratteri</h4>
+                <h4 v-else-if="taskAdded">TASK AGGIUNTA CON SUCCESSO!</h4>
+                <h4 v-else>AGGIUNGI UNA TASK</h4>
                 <input type="text" @keyup.enter="addTask" v-model="newTask" :placeholder="message">
                 <button @click="addTask">Add Task</button>
             </div>

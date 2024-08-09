@@ -50,6 +50,16 @@ li i {
     background-color: rgb(125, 114, 101);
 }
 
+li .done {
+    text-decoration: line-through;
+    color: green;
+    background-color: aqua;
+}
+
+.error_task {
+    color: red;
+}
+
 #add_task {
     margin: 15px auto;
     text-align: center;
